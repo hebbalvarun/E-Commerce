@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .message h3 { color: #dc2626; }
+        .message h4 { color: #059669; }
+
+        form {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .back-button {
+            background: #4b5563;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            color: white;
+        }
+
+        .back-button:hover {
+            background: #374151;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Product</h1>
+        
+        <div class="message">
+            <h3 th:text="${session.fail}"></h3>
+            <h4 th:text="${session.pass}"></h4>
+            <th:block th:text="${@myService.removeMessage()}"></th:block>
+        </div>
+
+        <form action="/add-product" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Brand</label>
+                <input type="text" name="brand" required>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input type="text" name="price" required>
+            </div>
+
+            <div class="form-group">
+                <label>Size</label>
+                <input type="text" name="size" required>
+            </div>
+
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" name="stock" required>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="description" required>
+            </div>
+
+            <div class="form-group">
+                <label>Product Image</label>
+                <input type="file" name="image" required>
+            </div>
+
+            <button type="submit">Add Product</button>
+            <a href="/seller-home" class="btn back-button">Back to Home</a>
+        </form>
+    </div>
+</body>
+</html>

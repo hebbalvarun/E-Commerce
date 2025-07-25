@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Seller Registration</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 2.5em;
+        }
+
+        .message {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .message h3 {
+            color: #e74c3c;
+        }
+
+        .message h4 {
+            color: #27ae60;
+        }
+
+        form {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(8px);
+        }
+
+        form div {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        input:focus {
+            border-color: #2ecc71;
+            outline: none;
+            box-shadow: 0 0 8px rgba(46,204,113,0.3);
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .customer-link {
+            margin-top: 25px;
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .customer-link h2 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .customer-link a {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .customer-link a:hover {
+            color: #27ae60;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Seller Registration</h1>
+
+    <div class="message">
+        <h3 th:text="${session.fail}"></h3>
+        <h4 th:text="${session.pass}"></h4>
+        <th:block th:text="${@myService.removeMessage()}"></th:block>
+    </div>
+
+    <form action="/seller-signup" method="post">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+            <label for="mobile">Mobile</label>
+            <input type="tel" id="mobile" pattern="[0-9]{10}" name="mobile" required>
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Register as Seller</button>
+    </form>
+
+    <div class="customer-link">
+        <h2>Are you a Customer? <a href="/customer-signup">Click here</a> to Signup as a Customer</h2>
+    </div>
+</body>
+</html>

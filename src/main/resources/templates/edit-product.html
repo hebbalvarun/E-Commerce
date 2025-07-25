@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Edit Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sora', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .message h3 { color: #dc2626; }
+        .message h4 { color: #059669; }
+
+        form {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #0ea5e9;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+
+        .preview-image {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .preview-image img {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: inline-block;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .back-button {
+            background: #64748b;
+        }
+
+        .back-button:hover {
+            background: #475569;
+        }
+
+        .file-input {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Product</h1>
+        
+        <div class="message">
+            <h3 th:text="${session.fail}"></h3>
+            <h4 th:text="${session.pass}"></h4>
+            <th:block th:text="${@myService.removeMessage()}"></th:block>
+        </div>
+
+        <form action="/edit-product" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${product.id}">
+            
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" th:value="${product.name}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Brand</label>
+                <input type="text" name="brand" th:value="${product.brand}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input type="text" name="price" th:value="${product.price}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Size</label>
+                <input type="text" name="size" th:value="${product.size}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" name="stock" th:value="${product.stock}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" name="description" th:value="${product.description}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Current Image</label>
+                <div class="preview-image">
+                    <img height="100px" width="100px" th:src="'data:image/jpeg;base64,'+${product.base64Image()}">
+                </div>
+                <div class="file-input">
+                    <label>Update Image (Optional)</label>
+                    <input type="file" name="image">
+                </div>
+            </div>
+
+            <button type="submit">Update Product</button>
+            <a href="/seller-home" class="back-link">
+                <button type="button" class="back-button">Back to Home</button>
+            </a>
+        </form>
+    </div>
+</body>
+</html>

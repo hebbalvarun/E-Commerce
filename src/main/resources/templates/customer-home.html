@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Welcome to Customer Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .message {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin: 30px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .action-button {
+            background: white;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background: #f7fafc;
+        }
+
+        .message h3 {
+            color: #e53e3e;
+            margin-bottom: 10px;
+        }
+
+        .message h4 {
+            color: #38a169;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Customer Home page</h1>
+    
+    <div class="message">
+        <h3 th:text="${session.fail}"></h3>
+        <h4 th:text="${session.pass}"></h4>
+        <th:block th:text="${@myService.removeMessage()}"></th:block>
+    </div>
+
+    <div class="button-container">
+        <a href="/view-products" class="action-button">View All Products</a>
+        <a href="/view-cart" class="action-button">View Cart</a>
+        <a href="/view-orders" class="action-button">View Past Orders</a>
+        <a href="/logout" class="action-button">Logout</a>
+    </div>
+</body>
+</html>

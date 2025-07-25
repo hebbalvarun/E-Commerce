@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Browse Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #0c4a6e;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .message {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #0c4a6e;
+            margin-bottom: 8px;
+        }
+
+        .product-brand {
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            color: #475569;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .product-size {
+            background: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #64748b;
+        }
+
+        .product-stock {
+            color: #059669;
+            font-weight: 500;
+        }
+
+        .product-price {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #0c4a6e;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background: #0c4a6e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #075985;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #0c4a6e;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #075985;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Browse Our Products</h1>
+
+        <div class="message">
+            <h3 th:text="${session.fail}"></h3>
+            <h4 th:text="${session.pass}"></h4>
+            <th:block th:text="${@myService.removeMessage()}"></th:block>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card" th:each="product:${list}">
+                <img class="product-image" th:src="'data:image/jpeg;base64,'+${product.base64Image()}" alt="Product">
+                <div class="product-info">
+                    <h3 class="product-name" th:text="${product.name}"></h3>
+                    <p class="product-brand" th:text="${product.brand}"></p>
+                    <p class="product-description" th:text="${product.description}"></p>
+                    <div class="product-meta">
+                        <span class="product-size" th:text="${product.size}"></span>
+                        <span class="product-stock" th:text="'In Stock: ' + ${product.stock}"></span>
+                    </div>
+                    <p class="product-price" th:text="'₹' + ${product.price}"></p>
+                    <a th:href="'/add-cart/'+${product.id}">
+                        <button class="add-to-cart">Add to Cart</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <a href="/customer-home" class="back-button">Back to Home</a>
+    </div>
+</body>
+</html>
